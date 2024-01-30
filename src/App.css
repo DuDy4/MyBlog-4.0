@@ -1,5 +1,51 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.postPage{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  justify-content: space-around;
+  min-height: 40vh;
+
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-evenly;
+}
+
+.postsList{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 40vh;
+}
+
+.flexCorner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 45vh;
+
+}
+
+.postsDisplay{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  min-width: 100vh;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
 }
 
 .App-logo {
