@@ -16,7 +16,7 @@ export function BlogProvider({children}) {
   const [postsFilters, setPostsFilters] = useState(new Map())
   const addPost = async (postToAdd) => {
     try {
-      const res = await fetch('http://localhost:3000/posts', {
+      const res = await fetch('http://localhost:4000/posts', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(postToAdd),
@@ -30,7 +30,7 @@ export function BlogProvider({children}) {
 
   const removePost = async (postToRemove) => {
     try {
-      const res = await fetch(`http://localhost:3000/posts/${postToRemove.id}`, {
+      const res = await fetch(`http://localhost:4000/posts/${postToRemove.id}`, {
         method: 'delete',
       })
       setEffect(!effect);
@@ -45,7 +45,7 @@ export function BlogProvider({children}) {
       content: content
     });
     try {
-      const url = `http://localhost:3000/posts/` + String(id);
+      const url = `http://localhost:4000/posts/` + String(id);
       const res = await fetch(url, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -77,7 +77,7 @@ export function BlogProvider({children}) {
 
     //This section will load the Posts in the local storage, in case of reload (refresh) of the page
     useEffect(() => {
-      let url = 'http://localhost:3000/posts?';
+      let url = 'http://localhost:4000/posts?';
       const addKeyValueToUrl = (key, value) => {
         url += `${value}=${key}&`;
       }

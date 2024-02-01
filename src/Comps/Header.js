@@ -1,6 +1,7 @@
 import {useContext} from "react";
 import {Link} from "react-router-dom";
 import {AuthContext} from "../providers/AuthProvider"
+import {GoogleLogin} from "@react-oauth/google";
 
 export default function Header(){
 
@@ -13,6 +14,7 @@ export default function Header(){
                     {user && <button onClick={signOut}>Sigh out</button>}
                     {user ? <h4>Hello {user.userName}</h4> : <button onClick={signIn}>Sigh in</button> }
                 </a>
+                <GoogleLogin />
                 <ul className="nav">
                     <li className="nav-item">
                         <Link className="nav-link" to='/'>

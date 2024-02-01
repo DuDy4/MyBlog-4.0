@@ -16,7 +16,7 @@ export default function PostPage(){
 
     useEffect(() => {
         async function fetchPost(){
-            const url = "http://localhost:3000/posts/" + id;
+            const url = "http://localhost:4000/posts/" + id;
             const res = await fetch(url);
             if (!res.ok) {
                 throw new Error('Network response was not ok');

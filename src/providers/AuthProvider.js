@@ -1,27 +1,28 @@
 import {createContext, useCallback, useEffect, useState} from "react";
-// import {GoogleAuth} from "google-auth-library"; GoogleAuth
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const handleCredentialResponse = useCallback((response) => {
-    console.log("Encoded JWT ID token: " + response.credential);
-
-    // You can send the token to the server here for verification
-    fetch(`${process.env.REACT_APP_API_SERVER_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ token: response.credential })
-    }).then((response) => {
-      //save user to db + create JWT to the client
-      console.log(response);
-      setUser({ id: 1, userName: 'Nir' })
-    });
-  }, []);
+  // const handleCredentialResponse = useCallback((response) => {
+  //   console.log("Encoded JWT ID token: " + response.credential);
+  //
+  //   // You can send the token to the server here for verification
+  //   fetch(`${process.env.REACT_APP_API_SERVER_URL}/auth/login`, {
+  //     method: "POST",
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({ token: response.credential })
+  //   }).then((response) => {
+  //     //save user to db + create JWT to the client
+  //     console.log(response);
+  //     setUser({ id: 1, userName: 'Dan' })
+  //   });
+  // }, []);
 
   const signIn = ({ userName, password }) => {
     // check if valid
