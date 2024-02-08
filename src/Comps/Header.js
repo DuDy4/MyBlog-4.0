@@ -2,6 +2,7 @@ import {useContext} from "react";
 import {Link} from "react-router-dom";
 import {AuthContext} from "../providers/AuthProvider"
 import {GoogleLogin} from "@react-oauth/google";
+import {jwtDecode} from "jwt-decode";
 
 export default function Header(){
 
@@ -12,9 +13,15 @@ export default function Header(){
             <div className="container">
                 <a className="navbar-brand flexCorner">
                     {user && <button onClick={signOut}>Sigh out</button>}
-                    {user ? <h4>Hello {user.userName}</h4> : <button onClick={signIn}>Sigh in</button> }
+                    {user && <h4>Hello {user.given_name}</h4>}
                 </a>
-                <GoogleLogin />
+                <GoogleLogin  onSuccess={(credentialResponse) => {
+                    const credentialDecoded = jwtDecode(credentialResponse.credential)
+                    console.log(credentialDecoded);
+                    signIn(credentialDecoded);
+                }} onError={() => {
+                    console.log("login error");
+                }}/>
                 <ul className="nav">
                     <li className="nav-item">
                         <Link className="nav-link" to='/'>

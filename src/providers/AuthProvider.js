@@ -1,5 +1,4 @@
-import {createContext, useCallback, useEffect, useState} from "react";
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import {createContext, useState} from "react";
 
 
 export const AuthContext = createContext(null);
@@ -24,9 +23,9 @@ export function AuthProvider({ children }) {
   //   });
   // }, []);
 
-  const signIn = ({ userName, password }) => {
+  const signIn = (user) => {
     // check if valid
-    setUser({ userName: 'Admin' })
+    setUser(user)
   }
 
   // useEffect(() => {
