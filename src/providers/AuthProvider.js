@@ -1,4 +1,4 @@
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 
 
 export const AuthContext = createContext(null);
@@ -24,9 +24,15 @@ export function AuthProvider({ children }) {
   // }, []);
 
   const signIn = (user) => {
-    // check if valid
     setUser(user)
+    localStorage.setItem("user", user.given_name)
   }
+
+  useEffect(() => {
+    const user = {};
+    user.given_name = localStorage.getItem("user");
+    setUser(user);
+  }, []);
 
   // useEffect(() => {
   //   window.google?.accounts.id.initialize({
@@ -41,6 +47,7 @@ export function AuthProvider({ children }) {
 
   const signOut = () => {
     setUser(null);
+    localStorage.removeItem("user");
   }
 
   const value = {

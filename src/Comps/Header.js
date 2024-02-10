@@ -15,13 +15,13 @@ export default function Header(){
                     {user && <button onClick={signOut}>Sigh out</button>}
                     {user && <h4>Hello {user.given_name}</h4>}
                 </a>
-                <GoogleLogin  onSuccess={(credentialResponse) => {
+                {!user && <GoogleLogin  onSuccess={(credentialResponse) => {
                     const credentialDecoded = jwtDecode(credentialResponse.credential)
                     console.log(credentialDecoded);
                     signIn(credentialDecoded);
                 }} onError={() => {
                     console.log("login error");
-                }}/>
+                }}/>}
                 <ul className="nav">
                     <li className="nav-item">
                         <Link className="nav-link" to='/'>

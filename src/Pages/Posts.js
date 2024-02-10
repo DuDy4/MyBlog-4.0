@@ -8,6 +8,7 @@ export default function Posts(){
     const [fromQuery, setFromQuery] = useState('');
     const [toQuery, setToQuery] = useState('');
     const [textQuery, setTextQuery] = useState('');
+    const [lastNameQuery, setLastNameQuery] = useState('')
 
     const handleUserFromInput = (evt) => {
         setFromQuery(evt.target.value);
@@ -17,6 +18,10 @@ export default function Posts(){
     }
     const handleUserTextInput = (evt) => {
         setTextQuery(evt.target.value);
+    }
+
+    const handleUserLastNameInput = (evt) => {
+        setLastNameQuery(evt.target.value);
     }
 
     useEffect(() => {
@@ -30,8 +35,11 @@ export default function Posts(){
         if (textQuery !== ''){
             filterMap.set('text', textQuery)
         }
+        if (lastNameQuery !== ''){
+            filterMap.set('userLastName', lastNameQuery)
+        }
         handleSetPostsFilters(filterMap)
-    }, [fromQuery,toQuery,textQuery]);
+    }, [fromQuery,toQuery,textQuery, lastNameQuery]);
 
     return (
         <div>
@@ -40,6 +48,8 @@ export default function Posts(){
             <br/>From ID:<input type="number" onChange={handleUserFromInput}/> to ID:<input type="number" onChange={handleUserToInput}/>
             <br/><br/>
             Or filter by text: <input onChange={handleUserTextInput}/>
+            <br/><br/>
+            Or filter by the user that created the post: <input onChange={handleUserLastNameInput}/>
             <PostList>
                 {posts
                     // .filter(post => post.title.toLowerCase().includes(query.toLowerCase()))
