@@ -95,10 +95,6 @@ export function BlogProvider({children}) {
         } catch {
           console.log('There was a problem with fetching the posts')
         }
-        // const stringMemo = localStorage.getItem('posts')
-        // if(stringMemo) {
-        //   setPosts(JSON.parse(stringMemo))
-        //   setCounter(posts.length) //This will set the with respect to the previous posts
       }
       fetchPosts()
     }, [effect, postsFilters]);

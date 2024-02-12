@@ -1,4 +1,5 @@
 import {createContext, useEffect, useState} from "react";
+import {jwtDecode} from "jwt-decode";
 
 
 export const AuthContext = createContext(null);
@@ -24,6 +25,7 @@ export function AuthProvider({ children }) {
   // }, []);
 
   const signIn = (user) => {
+
     setUser(user)
     localStorage.setItem("user", user.given_name)
   }

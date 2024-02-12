@@ -8,7 +8,8 @@ export default function Posts(){
     const [fromQuery, setFromQuery] = useState('');
     const [toQuery, setToQuery] = useState('');
     const [textQuery, setTextQuery] = useState('');
-    const [lastNameQuery, setLastNameQuery] = useState('')
+    const [lastNameQuery, setLastNameQuery] = useState('');
+    const [fromPage, setFromPage] = useState(0);
 
     const handleUserFromInput = (evt) => {
         setFromQuery(evt.target.value);
@@ -19,9 +20,11 @@ export default function Posts(){
     const handleUserTextInput = (evt) => {
         setTextQuery(evt.target.value);
     }
-
     const handleUserLastNameInput = (evt) => {
         setLastNameQuery(evt.target.value);
+    }
+    const handleFromPage = async(num) => {
+        setFromPage(fromPage + num);
     }
 
     useEffect(() => {
@@ -38,8 +41,9 @@ export default function Posts(){
         if (lastNameQuery !== ''){
             filterMap.set('userLastName', lastNameQuery)
         }
+        filterMap.set('fromPage', fromPage);
         handleSetPostsFilters(filterMap)
-    }, [fromQuery,toQuery,textQuery, lastNameQuery]);
+    }, [fromQuery,toQuery,textQuery, lastNameQuery, fromPage]);
 
     return (
         <div>
@@ -56,6 +60,10 @@ export default function Posts(){
                     .map((post) => <PostCard post={post}/>)
                 }
             </PostList>
+            <div className="buttons">
+                {(fromPage !== 0) && <button onClick={() => handleFromPage(-5)}>Previous page</button>}
+                {(posts.length >= 5) && <button onClick={() => handleFromPage(5)}>Next page</button>}
+            </div>
         </div>
     )
 }

@@ -17,6 +17,7 @@ export default function Header(){
                 </a>
                 {!user && <GoogleLogin  onSuccess={(credentialResponse) => {
                     const credentialDecoded = jwtDecode(credentialResponse.credential)
+                    console.log(credentialResponse)
                     console.log(credentialDecoded);
                     signIn(credentialDecoded);
                 }} onError={() => {

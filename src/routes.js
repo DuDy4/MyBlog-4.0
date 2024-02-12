@@ -26,8 +26,8 @@ export const router = createBrowserRouter(
                     element: <PostPage />
                 },
                 {
-                  path:'/contact',
-                  element: <Contact />
+                    path:'/contact',
+                    element: <Contact />
                 },
                 {
                     path: '/admin',

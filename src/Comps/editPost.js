@@ -9,8 +9,8 @@ export default function EditPost({post, handleEditMode}){
     const { register, handleSubmit,
         formState, reset } = useForm();
 
-    const handleEditPost = (data) => {
-        editPost(post.id, data.title, data.content);
+    const handleEditPost = async(data) => {
+        await editPost(post.id, data.title, data.content);
         post.title = data.title;
         post.content = data.content;
         reset();
