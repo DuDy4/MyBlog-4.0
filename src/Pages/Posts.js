@@ -4,7 +4,7 @@ import {BlogContext} from "../providers/BlogProvider";
 import {PostCard} from "../Comps/PostCard";
 
 export default function Posts(){
-    const {posts, handleSetPostsFilters} = useContext(BlogContext);
+    const {posts, noMorePosts, handleSetPostsFilters} = useContext(BlogContext);
     const [fromQuery, setFromQuery] = useState('');
     const [toQuery, setToQuery] = useState('');
     const [textQuery, setTextQuery] = useState('');
@@ -46,16 +46,16 @@ export default function Posts(){
     }, [fromQuery,toQuery,textQuery, lastNameQuery, fromPage]);
     return (
         <div>
-            <h2>Posts: {posts.length}</h2>
+            <h2>Posts</h2>
             <p>Here is the list of my posts!<br/>You can filter them as follow:</p>
             <br/>From ID:<input type="number" onChange={handleUserFromInput}/> to ID:<input type="number" onChange={handleUserToInput}/>
             <br/><br/>
             Or filter by text: <input onChange={handleUserTextInput}/>
             <br/><br/>
             Or filter by the user that created the post: <input onChange={handleUserLastNameInput}/>
+            <br/><br/>
             <PostList>
                 {posts
-                    // .filter(post => post.title.toLowerCase().includes(query.toLowerCase()))
                     .map((post) => <PostCard post={post}/>)
                 }
             </PostList>

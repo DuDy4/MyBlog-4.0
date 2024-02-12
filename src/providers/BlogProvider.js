@@ -7,12 +7,11 @@ export const BlogContext = createContext(null);
 export function BlogProvider({children}) {
   //This is the main data structure that contains all the posts in the blog.
   const [posts, setPosts] = useState([]);
-
+  //This will tell the posts that there is no more posts in the server
+  const [noMorePosts, setNoMorePosts] = useState(false)
   //This is the counter that saves the next id that will be given to the next post
   const [idCounter, setCounter] = useState(0)
-
   const [effect, setEffect] = useState(true)
-
   const [postsFilters, setPostsFilters] = useState(new Map())
   const addPost = async (postToAdd) => {
     try {
@@ -91,6 +90,10 @@ export function BlogProvider({children}) {
             throw new Error('Network response was not ok');
           }
           const data = await res.json()
+          if (data.length === 6){
+            setNoMorePosts(true);
+            data.pop()
+          }
           setPosts(data)
         } catch {
           console.log('There was a problem with fetching the posts')
@@ -99,7 +102,7 @@ export function BlogProvider({children}) {
       fetchPosts()
     }, [effect, postsFilters]);
 
-    const value = {posts, addPost, removePost, editPost, getId, assignId, handleSetPostsFilters};
+    const value = {posts, noMorePosts, addPost, removePost, editPost, getId, assignId, handleSetPostsFilters};
 
     return (
         <BlogContext.Provider value={value}>

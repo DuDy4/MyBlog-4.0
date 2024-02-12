@@ -18,19 +18,19 @@ export default function PostPage(){
     async function fetchPost(){
         const url = "http://localhost:4000/posts/" + id;
         const res = await fetch(url);
-        console.log(res)
         if (!res.ok) {
             throw new Error('Network response was not ok');
         }
         const currentPost = await res.json()
         await setPost(currentPost);
         const creatorId = await currentPost.createdBy;
-        await fetchUser(creatorId);
+        if (creatorId !== null){
+            await fetchUser(creatorId);
+        }
     }
 
     async function fetchUser(createdBy){
         const url = "http://localhost:4000/users/" + createdBy;
-        console.log(url)
         const res = await fetch(url);
         if (!res.ok) {
             throw new Error('Network response was not ok');
@@ -39,28 +39,26 @@ export default function PostPage(){
         console.log(creator)
         setPostCreator(creator)
     }
-    useEffect(() => {
-        fetchPost();
-        setRenderChecker(!renderChecker)
-    }, [editMode]);
+
 
     //This state manipulation is crucial to the page.
     //This will deter if the component will be the regular post or the post
     //in "edit mode" (a different component).
-
-    //This enters and exits from edit mode
     const handleEditMode = () => {
         setEditMode(!editMode)
     }
-
-    //This will ensure that leaving the page will reset the edit mode
-    //so the next time somebody will read the post it will be the regular component.
+    //This enters and exits from edit mode
     useEffect(() => {
-        return () => {
+        fetchPost();
+        setRenderChecker(!renderChecker)
+        return () => { //This will ensure that leaving the page will reset the edit mode
+            //so the next time somebody will read the post it will be the regular component.
             setEditMode(false)
         }
-    }, [id]) // I put the id in the re-render stage to catch URL "manipulations"
+    }, [id]);
+    // I put the id in the re-render stage to catch URL "manipulations"
     // and reset the edit mode when moving through post-pages
+
 
     return (
         editMode ?

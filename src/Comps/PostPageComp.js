@@ -26,13 +26,10 @@ export default function PostPageComp({post, handleEditMode, creator}){
                         {post.content}
                     </p>
 
-                    <p className="created-by">
-                        Created by: {creator? (creator.firstName + ' ' + creator.lastName) : <div className="spinner-border"
-                                                                       style={{width: '3rem', height: '3rem',}}
-                                                                       role="status">
-                        <span className="visually-hidden">Loading...</span>
-                    </div>}
-                    </p>
+                    {creator && <p className="created-by">
+                        Created by: {creator.firstName + ' ' + creator.lastName}
+
+                    </p>}
                 </div>
             ) : (
                 <div className="spinner-border"
