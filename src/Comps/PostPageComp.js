@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 //This component will load in PostPage, when not in edit mode.
 //I used props drilling instead of provider because I only needed
 // post and handleEditMode on one level of children.
-export default function PostPageComp({post, handleEditMode}){
+export default function PostPageComp({post, handleEditMode, creator}){
 
     const {user} = useContext(AuthContext)
     const {removePost} = useContext(BlogContext)
@@ -24,6 +24,14 @@ export default function PostPageComp({post, handleEditMode}){
                     <h1>{post.title}</h1>
                     <p>
                         {post.content}
+                    </p>
+
+                    <p className="created-by">
+                        Created by: {creator? (creator.firstName + ' ' + creator.lastName) : <div className="spinner-border"
+                                                                       style={{width: '3rem', height: '3rem',}}
+                                                                       role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>}
                     </p>
                 </div>
             ) : (

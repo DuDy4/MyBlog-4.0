@@ -44,7 +44,6 @@ export default function Posts(){
         filterMap.set('fromPage', fromPage);
         handleSetPostsFilters(filterMap)
     }, [fromQuery,toQuery,textQuery, lastNameQuery, fromPage]);
-
     return (
         <div>
             <h2>Posts: {posts.length}</h2>

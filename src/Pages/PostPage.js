@@ -10,20 +10,37 @@ export default function PostPage(){
     const {id} = useParams()
     // const {posts} = useContext(BlogContext)
     // const post = posts.find(element => element.id === Number(id)) //This will help us hold the chosen post
-    const [post, setPost] = useState({})
-    const [editMode, setEditMode] = useState(false)
-    const [renderChecker, setRenderChecker] = useState(true)
+    const [post, setPost] = useState({});
+    const [editMode, setEditMode] = useState(false);
+    const [renderChecker, setRenderChecker] = useState(true);
+    const [postCreator, setPostCreator] = useState()
 
-    useEffect(() => {
-        async function fetchPost(){
-            const url = "http://localhost:4000/posts/" + id;
-            const res = await fetch(url);
-            if (!res.ok) {
-                throw new Error('Network response was not ok');
-            }
-            setPost(await res.json())
+    async function fetchPost(){
+        const url = "http://localhost:4000/posts/" + id;
+        const res = await fetch(url);
+        console.log(res)
+        if (!res.ok) {
+            throw new Error('Network response was not ok');
         }
-        fetchPost()
+        const currentPost = await res.json()
+        await setPost(currentPost);
+        const creatorId = await currentPost.createdBy;
+        await fetchUser(creatorId);
+    }
+
+    async function fetchUser(createdBy){
+        const url = "http://localhost:4000/users/" + createdBy;
+        console.log(url)
+        const res = await fetch(url);
+        if (!res.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const creator = await res.json()
+        console.log(creator)
+        setPostCreator(creator)
+    }
+    useEffect(() => {
+        fetchPost();
         setRenderChecker(!renderChecker)
     }, [editMode]);
 
@@ -48,7 +65,7 @@ export default function PostPage(){
     return (
         editMode ?
             (user ?
-                <EditPost post={post} handleEditMode={handleEditMode}/> : <h2>Only Admin can edit this post (and other posts)</h2>)
-            : <PostPageComp post={post} handleEditMode={handleEditMode}/>
+                <EditPost post={post}  creator = {postCreator} handleEditMode={handleEditMode}/> : <h2>Only Admin can edit this post (and other posts)</h2>)
+            : <PostPageComp post={post} creator = {postCreator} handleEditMode={handleEditMode}/>
     )
 }
