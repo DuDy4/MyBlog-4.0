@@ -1,9 +1,7 @@
 import myCatImg from "../Chana.jpg"
 
-
 export default function Home(){
-    //After a lot of css tries, I used the one worked on Nir's project...
-    //Those included on section and 2 divisions.
+
     return (
         <section className="py-5 text-center container">
             <div className="row py-lg-5">

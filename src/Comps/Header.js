@@ -15,7 +15,9 @@ export default function Header(){
                     {user && <button onClick={signOut}>Sigh out</button>}
                     {user && <h4>Hello {user.given_name}</h4>}
                 </a>
-                {!user && <GoogleLogin  onSuccess={(credentialResponse) => {
+
+                {//Google-auth library broke my project, so I used another library
+                    !user && <GoogleLogin  onSuccess={(credentialResponse) => {
                     const credentialDecoded = jwtDecode(credentialResponse.credential)
                     console.log(credentialResponse)
                     console.log(credentialDecoded);

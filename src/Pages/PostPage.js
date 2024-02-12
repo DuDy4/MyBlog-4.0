@@ -8,12 +8,12 @@ import {AuthContext} from "../providers/AuthProvider";
 export default function PostPage(){
     const {user} = useContext(AuthContext);
     const {id} = useParams()
-    // const {posts} = useContext(BlogContext)
-    // const post = posts.find(element => element.id === Number(id)) //This will help us hold the chosen post
     const [post, setPost] = useState({});
     const [editMode, setEditMode] = useState(false);
+
+    //This is a generic hook to rerender the page whenever I need to
     const [renderChecker, setRenderChecker] = useState(true);
-    const [postCreator, setPostCreator] = useState()
+    const [postCreator, setPostCreator] = useState() //This is the user who created the post
 
     async function fetchPost(){
         const url = "http://localhost:4000/posts/" + id;
@@ -24,7 +24,7 @@ export default function PostPage(){
         const currentPost = await res.json()
         await setPost(currentPost);
         const creatorId = await currentPost.createdBy;
-        if (creatorId !== null){
+        if (creatorId !== null){ //if the post was created by a user, it should fetch the user data
             await fetchUser(creatorId);
         }
     }

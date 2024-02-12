@@ -15,7 +15,7 @@ export function BlogProvider({children}) {
   const [postsFilters, setPostsFilters] = useState(new Map())
   const addPost = async (postToAdd) => {
     try {
-      const res = await fetch('http://localhost:4000/posts', {
+      await fetch('http://localhost:4000/posts', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(postToAdd),
@@ -29,7 +29,7 @@ export function BlogProvider({children}) {
 
   const removePost = async (postToRemove) => {
     try {
-      const res = await fetch(`http://localhost:4000/posts/${postToRemove.id}`, {
+      await fetch(`http://localhost:4000/posts/${postToRemove.id}`, {
         method: 'delete',
       })
       setEffect(!effect);
@@ -45,7 +45,7 @@ export function BlogProvider({children}) {
     });
     try {
       const url = `http://localhost:4000/posts/` + String(id);
-      const res = await fetch(url, {
+      await fetch(url, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: bodyToSend
@@ -81,7 +81,7 @@ export function BlogProvider({children}) {
         url += `${value}=${key}&`;
       }
       postsFilters.forEach(addKeyValueToUrl);
-      url = url.slice(0, -1);
+      url = url.slice(0, -1); //remove the last '&'
 
       const fetchPosts = async () => {
         try {

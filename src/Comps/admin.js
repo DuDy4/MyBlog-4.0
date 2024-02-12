@@ -2,7 +2,6 @@ import {useContext, useEffect, useState} from "react";
 import {BlogContext} from "../providers/BlogProvider";
 import {useForm} from "react-hook-form";
 
-
 export default function AdminComp() {
 
     const {addPost, assignId} = useContext(BlogContext)
@@ -10,7 +9,6 @@ export default function AdminComp() {
     const [content, setContent] = useState("")
 
     const { register, handleSubmit, formState, reset } = useForm();
-
 
     const prevTitle = localStorage.getItem('title')
     const prevContent = localStorage.getItem('content')
@@ -32,12 +30,11 @@ export default function AdminComp() {
             id: assignId(),
             title: data.title,
             content: data.content
-        })
+        })// this will add a post with {createdBy: undefined}
         reset()
         setTitle('')
         setContent('') //Remove the current draft from local storage
     }
-
 
     return (
         <div>

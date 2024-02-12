@@ -2,7 +2,6 @@ import {useForm} from "react-hook-form";
 import {BlogContext} from "../providers/BlogProvider";
 import {useContext} from "react";
 
-
 //This component will be rendered only when in PostPage AND in edit mode.
 export default function EditPost({post, handleEditMode}){
     const {editPost} = useContext(BlogContext)

@@ -25,10 +25,8 @@ export default function PostPageComp({post, handleEditMode, creator}){
                     <p>
                         {post.content}
                     </p>
-
                     {creator && <p className="created-by">
                         Created by: {creator.firstName + ' ' + creator.lastName}
-
                     </p>}
                 </div>
             ) : (
