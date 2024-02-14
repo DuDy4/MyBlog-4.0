@@ -14,6 +14,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const user = {};
     user.given_name = localStorage.getItem("user");
+    console.log(user.given_name)
     setUser(user);
   }, []);
 
