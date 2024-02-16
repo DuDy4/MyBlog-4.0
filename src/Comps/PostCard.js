@@ -13,7 +13,10 @@ export function PostCard({post}) {
                         {post.content}
                     </div>}
              </div>
-             <Link to={ `/posts/${post.id}`} className="btn btn-primary"><h6>Read More</h6></Link>
+             <div>
+                 <Link to={ `/posts/${post.id}`} className="btn btn-primary"><h6>Read More</h6></Link>
+             </div>
+
         </li>
     )
 }

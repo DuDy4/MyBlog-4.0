@@ -24,8 +24,8 @@
 .postsList{
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  min-height: 40vh;
+  justify-content: space-between;
+  min-height: 60vh;
 }
 
 .flexCorner {
@@ -33,14 +33,13 @@
   flex-direction: row;
   justify-content: space-between;
   min-width: 45vh;
-
 }
 
 .postsDisplay{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  min-width: 100vh;
+  min-width: 140vh;
 }
 
 .content {

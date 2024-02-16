@@ -20,6 +20,9 @@ export default function Header(){
                 }</a>
 
                 <GoogleLoginButton/>
+
+                {//add later          <div id="signUpDiv" data-text="signup_with"></div>
+                }
                 {/*{//Google-auth library broke my project, so I used another library*/}
                 {/*    !user && <GoogleLogin  onSuccess={(credentialResponse) => {*/}
                 {/*    const credentialDecoded = jwtDecode(credentialResponse.credential)*/}
