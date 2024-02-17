@@ -1,4 +1,5 @@
-import {createContext, useEffect, useState} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
+import {AuthContext} from "./AuthProvider";
 
 
 // Create special context Object
@@ -10,15 +11,20 @@ export function BlogProvider({children}) {
   //This will tell the posts that there is no more posts in the server
   const [noMorePosts, setNoMorePosts] = useState(false)
   //This is the counter that saves the next id that will be given to the next post
-  const [idCounter, setCounter] = useState(0)
   const [effect, setEffect] = useState(true)
   const [postsFilters, setPostsFilters] = useState(new Map())
+  const {user} = useContext(AuthContext)
+
   const addPost = async (postToAdd) => {
+    const packagePostUser = {
+      userId: user.id,
+      post: postToAdd
+    }
     try {
       await fetch('http://localhost:4000/posts', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(postToAdd),
+        body: JSON.stringify(packagePostUser),
       })
       console.log('post was sent')
       setEffect(!effect);
@@ -27,10 +33,12 @@ export function BlogProvider({children}) {
     }
   }
 
-  const removePost = async (postToRemove) => {
+  const removePost = async (postId) => {
     try {
-      await fetch(`http://localhost:4000/posts/${postToRemove.id}`, {
+      await fetch(`http://localhost:4000/posts/${postId}`, {
         method: 'delete',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({userId: user.id})
       })
       setEffect(!effect);
     } catch (error) {
@@ -39,9 +47,10 @@ export function BlogProvider({children}) {
   }
 
   const editPost = async (id, title, content) => {
+    const postData = {title: title, content: content}
     let bodyToSend = JSON.stringify({
-      title: title,
-      content: content
+      postData: postData,
+      userId: user.id
     });
     try {
       const url = `http://localhost:4000/posts/` + String(id);
@@ -55,17 +64,6 @@ export function BlogProvider({children}) {
       throw new Error('Could not add the post to server');
     }
   }
-
-    const getId = () => {
-      return idCounter;
-    }
-
-    // This function returns the next id that will be, if we add another post.
-    const assignId = () => {
-      const id = idCounter;
-      setCounter(idCounter + 1);
-      return id;
-    }
 
     const handleSetPostsFilters = (postsFilterMap) => {
       setPostsFilters(postsFilterMap)
@@ -102,7 +100,7 @@ export function BlogProvider({children}) {
       fetchPosts()
     }, [effect, postsFilters]);
 
-    const value = {posts, noMorePosts, addPost, removePost, editPost, getId, assignId, handleSetPostsFilters};
+    const value = {posts, noMorePosts, addPost, removePost, editPost, handleSetPostsFilters};
 
     return (
         <BlogContext.Provider value={value}>

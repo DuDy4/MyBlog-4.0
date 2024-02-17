@@ -7,19 +7,16 @@ import {router} from "./routes";
 import {RouterProvider} from "react-router-dom";
 import {BlogProvider} from "./providers/BlogProvider";
 import {AuthProvider} from "./providers/AuthProvider";
-import {GoogleOAuthProvider} from "@react-oauth/google";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+        <AuthProvider>
             <BlogProvider>
-                <AuthProvider>
-                    <RouterProvider router={router}/>
-                </AuthProvider>
+                <RouterProvider router={router}/>
             </BlogProvider>
-        </GoogleOAuthProvider>
-     </React.StrictMode>
+        </AuthProvider>
+    </React.StrictMode>
 );
 
 reportWebVitals();
