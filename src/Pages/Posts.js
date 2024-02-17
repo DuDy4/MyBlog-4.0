@@ -59,7 +59,7 @@ export default function Posts(){
             <div>
                 <PostList>
                     {posts
-                        .map((post) => <PostCard post={post}/>)
+                        .map((post) => <PostCard key={post.id} post={post}/>)
                     }
                 </PostList>
                 <div className="buttons">
