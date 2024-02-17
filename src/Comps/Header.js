@@ -29,8 +29,8 @@ export default function Header(){
                         </Link>
                     </li>
                     {user && <li className="nav-item">
-                        <Link className="nav-link" to='/admin'>
-                            Admin
+                        <Link className="nav-link" to='/write_post'>
+                            Write post
                         </Link>
                     </li>}
                 </ul>

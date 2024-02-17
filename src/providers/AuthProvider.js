@@ -10,7 +10,6 @@ export function AuthProvider({ children }) {
   const {handleGoogle} = useFetch(url)
 
   const signIn = (user) => {
-
     setUser(user)
     localStorage.setItem("user", user.given_name)
   }
