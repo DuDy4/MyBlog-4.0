@@ -1,12 +1,14 @@
 import {useContext, useEffect, useState} from "react";
 import {BlogContext} from "../providers/BlogProvider";
 import {useForm} from "react-hook-form";
+import {AuthContext} from "../providers/AuthProvider";
 
 export default function AdminComp() {
 
-    const {addPost, assignId} = useContext(BlogContext)
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("")
+    const {user} = useContext(AuthContext);
+    const {addPost} = useContext(BlogContext);
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
 
     const { register, handleSubmit, formState, reset } = useForm();
 
@@ -27,9 +29,10 @@ export default function AdminComp() {
 
     const handleNewPostSubmit = (data) => {
         addPost({
-            id: assignId(),
+            id: 0,
             title: data.title,
-            content: data.content
+            content: data.content,
+            createdBy: user.id
         })// this will add a post with {createdBy: undefined}
         reset()
         setTitle('')

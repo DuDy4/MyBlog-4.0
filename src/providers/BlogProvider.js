@@ -21,7 +21,7 @@ export function BlogProvider({children}) {
       post: postToAdd
     }
     try {
-      await fetch('http://localhost:4000/posts', {
+      await fetch(process.env.REACT_APP_API_SERVER_URL + '/posts', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(packagePostUser),
@@ -35,7 +35,7 @@ export function BlogProvider({children}) {
 
   const removePost = async (postId) => {
     try {
-      await fetch(`http://localhost:4000/posts/${postId}`, {
+      await fetch(process.env.REACT_APP_API_SERVER_URL + `/posts/${postId}`, {
         method: 'delete',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({userId: user.id})
@@ -53,7 +53,7 @@ export function BlogProvider({children}) {
       userId: user.id
     });
     try {
-      const url = `http://localhost:4000/posts/` + String(id);
+      const url = process.env.REACT_APP_API_SERVER_URL + `/posts/` + String(id);
       await fetch(url, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -74,7 +74,7 @@ export function BlogProvider({children}) {
 
     //This section will load the Posts in the local storage, in case of reload (refresh) of the page
     useEffect(() => {
-      let url = 'http://localhost:4000/posts?';
+      let url = process.env.REACT_APP_API_SERVER_URL + '/posts?';
       const addKeyValueToUrl = (key, value) => {
         url += `${value}=${key}&`;
       }

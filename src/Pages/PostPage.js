@@ -16,7 +16,7 @@ export default function PostPage(){
     const [postCreator, setPostCreator] = useState() //This is the user who created the post
 
     async function fetchPost(){
-        const url = "http://localhost:4000/posts/" + id;
+        const url = process.env.REACT_APP_API_SERVER_URL + "/posts/" + id;
         const res = await fetch(url);
         if (!res.ok) {
             throw new Error('Network response was not ok');
@@ -30,7 +30,8 @@ export default function PostPage(){
     }
 
     async function fetchUser(createdBy){
-        const url = "http://localhost:4000/users/" + createdBy;
+        const url = process.env.REACT_APP_API_SERVER_URL + "/users/" + createdBy;
+        console.log(url)
         const res = await fetch(url);
         if (!res.ok) {
             throw new Error('Network response was not ok');
