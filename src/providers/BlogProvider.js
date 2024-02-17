@@ -49,7 +49,7 @@ export function BlogProvider({children}) {
   const editPost = async (id, title, content) => {
     const postData = {title: title, content: content}
     let bodyToSend = JSON.stringify({
-      postData: postData,
+      dataToChange: postData,
       userId: user.id
     });
     try {
