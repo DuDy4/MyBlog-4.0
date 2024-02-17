@@ -56,6 +56,14 @@
   color: rgb(128, 128, 128);
 }
 
+.logOutButton{
+  color: red;
+  border: 1px solid rgb(128, 128, 128);
+  background-color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -1,28 +1,13 @@
-import {createContext, useCallback, useEffect, useState} from "react";
-
+import {createContext, useEffect, useState} from "react";
+import useFetch from "../hooks/useFetch";
 
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-
-  const handleCredentialResponse = useCallback((response) => {
-    console.log("Encoded JWT ID token: " + response.credential);
-
-    // You can send the token to the server here for verification
-    fetch(`${process.env.REACT_APP_API_SERVER_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ token: response.credential })
-    }).then((response) => {
-      //save user to db + create JWT to the client
-      console.log(response);
-      setUser({ id: 1, userName: 'Admin' })
-    });
-  }, []);
-
+  const [userToken, setUserToken] = useState('')
+  const url = "http://localhost:4000/oauth";
+  const {handleGoogle, loading, error} = useFetch(url)
 
   const signIn = (user) => {
 
@@ -30,16 +15,6 @@ export function AuthProvider({ children }) {
     localStorage.setItem("user", user.given_name)
   }
 
-  // useEffect(() => {
-  //   window.google?.accounts.id.initialize({
-  //     client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-  //     callback: handleCredentialResponse,
-  //   });
-  //   window.google?.accounts.id.renderButton(
-  //       document.getElementById('signInDiv'),
-  //       { theme: 'outline', size: 'large' }
-  //   );
-  // }, [handleCredentialResponse]);
   const signOut = () => {
     setUser(null);
     localStorage.removeItem("user");
@@ -48,6 +23,26 @@ export function AuthProvider({ children }) {
   const value = {
     user, signOut, signIn
   }
+
+  useEffect(() => {
+    const theUser = localStorage.getItem("user");
+    const theToken = localStorage.getItem("token")
+
+    if (theUser && !theUser.includes("undefined") &&
+        theToken && !theToken.includes(undefined)) {
+      setUser(JSON.parse(theUser));
+      setUserToken(JSON.parse(theToken))
+    } else {
+      window.google?.accounts.id.initialize({
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        callback: handleGoogle,
+      });
+      window.google?.accounts.id.renderButton(
+          document.getElementById('signDiv'),
+          { theme: 'outline', size: 'large' }
+      );
+    }
+  }, [handleGoogle]);
 
   return (
       <AuthContext.Provider value={value}>

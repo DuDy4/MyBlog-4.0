@@ -22,6 +22,8 @@ const useFetch = (url) => {
             .then((data) => {
                 if (data?.user) {
                     localStorage.setItem("user", JSON.stringify(data?.user));
+                    localStorage.setItem("token", JSON.stringify(data?.token));
+
                     window.location.reload();
                 }
                 throw new Error(data?.message || data);
