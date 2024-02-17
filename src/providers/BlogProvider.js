@@ -26,7 +26,6 @@ export function BlogProvider({children}) {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(packagePostUser),
       })
-      console.log('post was sent')
       setEffect(!effect);
     } catch (error) {
       throw new Error('Could not add the post to server');

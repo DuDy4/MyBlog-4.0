@@ -31,13 +31,11 @@ export default function PostPage(){
 
     async function fetchUser(createdBy){
         const url = process.env.REACT_APP_API_SERVER_URL + "/users/" + createdBy;
-        console.log(url)
         const res = await fetch(url);
         if (!res.ok) {
             throw new Error('Network response was not ok');
         }
         const creator = await res.json()
-        console.log(creator)
         setPostCreator(creator)
     }
 
