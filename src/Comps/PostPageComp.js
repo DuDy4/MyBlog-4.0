@@ -13,7 +13,7 @@ export default function PostPageComp({post, handleEditMode, creator}){
     const navigate = useNavigate()
 
     const handleRemovePost = () => {
-        removePost(post)
+        removePost(post.id)
         navigate('/posts') //return to the posts list page instead of stay on loading...
     }
 
@@ -36,10 +36,11 @@ export default function PostPageComp({post, handleEditMode, creator}){
                     <span className="visually-hidden">Loading...</span>
                 </div>
             )}
+            {user && (user.id === post.createdBy) &&
             <div className="buttons">
                 {user && <button onClick={handleEditMode}>Edit</button>}
                 {user && <button onClick={handleRemovePost}>Delete</button>}
-            </div>
+            </div>}
         </div>
     )
 }
