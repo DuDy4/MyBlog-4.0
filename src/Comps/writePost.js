@@ -41,24 +41,27 @@ export default function AdminComp() {
             <h2>Add a post to the blog:</h2>
             <br/>
             <form className='form' onSubmit={handleSubmit(handleNewPostSubmit)}>
-                <div>
-                    <label htmlFor="title">Title</label>
-                    <input defaultValue={prevTitle ? prevTitle : ''}
-                           onKeyUp={event => {setTitle(event.target.value)}} //save to draft
-                           type="text" {...register('title', {required: true})}/>
-                    {formState.errors.title && <span className="text-danger">Error in this field!</span>}
-                </div>
-                <br/>
-                <div>
-                    <label htmlFor="content">Content</label>
-                    <textarea defaultValue={prevContent ? prevContent : ''}
-                              onKeyUp={event => {setContent(event.target.value)}} //save to draft
-                              {...register('content', {minLength: 5, required: true})}></textarea>
-                    {formState.errors.content && <span className="text-danger">Must write at least 5 characters</span>}
+                <div className="formLines">
+                    <div className="formLine">
+                        <label htmlFor="title">Title:</label>
+                        <input defaultValue={prevTitle ? prevTitle : ''}
+                               onKeyUp={event => {setTitle(event.target.value)}} //save to draft
+                               type="text" {...register('title', {required: true})}/>
+                        {formState.errors.title && <span className="text-danger">Error in this field!</span>}
+                    </div>
+                    <div className="formLine">
+                        <label htmlFor="content">Content</label>
+                        <textarea defaultValue={prevContent ? prevContent : ''}
+                                  onKeyUp={event => {setContent(event.target.value)}} //save to draft
+                                  {...register('content', {minLength: 5, required: true})}></textarea>
+                        {formState.errors.content && <span className="text-danger">Must write at least 5 characters</span>}
+                    </div>
+                    <div>
+                        <button className="button" type="submit">Create</button>
+                    </div>
                 </div>
 
-                <br/>
-                <button type="submit">Create</button>
+
             </form>
         </div>
     )

@@ -25,7 +25,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 60vh;
+  gap: 15px;
+
 }
 
 .flexCorner {
@@ -39,12 +40,26 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  min-width: 140vh;
+  gap: 35px;
 }
 
 .content {
   display: flex;
   justify-content: center;
+}
+
+.formLines{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.formLine{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
 }
 
 .App-logo {

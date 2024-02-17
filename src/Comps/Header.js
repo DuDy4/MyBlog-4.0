@@ -14,7 +14,7 @@ export default function Header(){
                     {user && <button className="logOutButton" onClick={signOut}>Sigh out</button>}
                 </a>
                 <div className="navbar-brand">{
-                    user ? `Hello: ${user.firstName}` : <div id="signDiv" data-text="sign_with_google"></div>
+                    user ? `Hello ${user.firstName} :)` : <div id="signDiv" data-text="sign_with_google"></div>
                 }</div>
 
                 <ul className="nav">

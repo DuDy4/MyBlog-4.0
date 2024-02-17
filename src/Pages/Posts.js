@@ -47,22 +47,27 @@ export default function Posts(){
     return (
         <div>
             <h2>Posts</h2>
-            <p>Here is the list of my posts!<br/>You can filter them as follow:</p>
-            <br/>From ID:<input type="number" onChange={handleUserFromInput}/> to ID:<input type="number" onChange={handleUserToInput}/>
-            <br/><br/>
-            Or filter by text (in title): <input onChange={handleUserTextInput}/>
-            <br/><br/>
-            Or filter by the user that created the post: <input onChange={handleUserLastNameInput}/>
-            <br/><br/><br/>
-            <PostList>
-                {posts
-                    .map((post) => <PostCard post={post}/>)
-                }
-            </PostList>
-            <div className="buttons">
-                {(fromPage !== 0) && <button onClick={() => handleFromPage(-5)}>Previous page</button>}
-                {(posts.length >= 5) && <button onClick={() => handleFromPage(5)}>Next page</button>}
+            <p>Here is the list of my posts!<br/></p>
+
+            <div className="formLines">
+                You can filter them as follow:
+                <div>From post number:<input type="number" onChange={handleUserFromInput}/> to post number:<input type="number" onChange={handleUserToInput}/></div>
+                <div>Or filter by text (in title): <input onChange={handleUserTextInput}/></div>
+                <div>Or filter by the user that created the post (last name): <input onChange={handleUserLastNameInput}/></div>
             </div>
+            <br/>
+            <div>
+                <PostList>
+                    {posts
+                        .map((post) => <PostCard post={post}/>)
+                    }
+                </PostList>
+                <div className="buttons">
+                    {(fromPage !== 0) && <button onClick={() => handleFromPage(-5)}>Previous page</button>}
+                    {(posts.length >= 5) && <button onClick={() => handleFromPage(5)}>Next page</button>}
+                </div>
+            </div>
+
         </div>
     )
 }
