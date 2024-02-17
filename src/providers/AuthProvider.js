@@ -7,7 +7,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [userToken, setUserToken] = useState('')
   const url = "http://localhost:4000/oauth";
-  const {handleGoogle, loading, error} = useFetch(url)
+  const {handleGoogle} = useFetch(url)
 
   const signIn = (user) => {
 
