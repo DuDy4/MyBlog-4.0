@@ -86,12 +86,17 @@ export function BlogProvider({children}) {
           if (!res.ok) {
             throw new Error('Network response was not ok');
           }
+
           const data = await res.json()
-          if (data.length === 6){
+          const {postsList, errorToClient} = data
+          if (postsList === 6){
             setNoMorePosts(true);
-            data.pop()
+            postsList.pop()
           }
-          setPosts(data)
+          if (errorToClient){
+            console.log(errorToClient);
+          }
+          setPosts(postsList);
         } catch {
           console.log('There was a problem with fetching the posts')
         }
