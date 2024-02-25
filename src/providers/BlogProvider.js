@@ -10,7 +10,7 @@ export function BlogProvider({children}) {
   const [posts, setPosts] = useState([]);
   //This will tell the posts that there is no more posts in the server
   const [noMorePosts, setNoMorePosts] = useState(false)
-  //This is the counter that saves the next id that will be given to the next post
+  //This is the counter that save s the next id that will be given to the next post
   const [effect, setEffect] = useState(true)
   const [postsFilters, setPostsFilters] = useState(new Map())
   const {user} = useContext(AuthContext)

@@ -1,13 +1,12 @@
 import {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-// import {BlogContext} from "../providers/BlogProvider";
 import PostPageComp from "../Comps/PostPageComp";
 import EditPost from "../Comps/editPost";
 import {AuthContext} from "../providers/AuthProvider";
 
 export default function PostPage(){
     const {user} = useContext(AuthContext);
-    const {id} = useParams()
+    const {id} = useParams();
     const [post, setPost] = useState({});
     const [editMode, setEditMode] = useState(false);
 
@@ -57,7 +56,6 @@ export default function PostPage(){
     }, [id]);
     // I put the id in the re-render stage to catch URL "manipulations"
     // and reset the edit mode when moving through post-pages
-
 
     return (
         editMode ?
