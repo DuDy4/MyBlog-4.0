@@ -31,7 +31,7 @@ export default function PostPageComp({post, handleEditMode, creator}){
                 </div>
             ) : (
                 <div className="spinner-border"
-                     style={{width: '3rem', height: '3rem',}}
+                     style={{width: '1rem', height: '1rem',}}
                      role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
